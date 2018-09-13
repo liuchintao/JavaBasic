@@ -13,7 +13,9 @@ public class RebuildTreeAndGetNextInOrder {
 		public String toString() {
 			return "MyBiTree value=" + value;
 		}
-
+		public MyBiTree(int val) {
+			this.value = val;
+		}
 	}
 
 	public static void postOrderPrint(MyBiTree t) {
@@ -72,56 +74,36 @@ public class RebuildTreeAndGetNextInOrder {
 		return ReBuildCore(inOrder, preOrder, len);
 	}
 
-	public static MyBiTree ReBuildCore(int[] inOrder, int[] preOrder, int len) throws Exception {
-		if (inOrder.length == 0 && preOrder.length == 0)
-			return null;
-		int rootValue = preOrder[0];
-		MyBiTree root = new MyBiTree();
-		root.value = rootValue;
-		root.left = root.right = null;
-		if (preOrder[0] == preOrder[len - 1]) {
-			if (inOrder[0] == inOrder[len - 1] && inOrder[0] == preOrder[0])
-				return root;
-			else
-				throw new Exception("Invalid Input");
-		}
-		int rootInOrder = inOrder[0];
-		int i = 0;
-		while (i < len && rootInOrder != rootValue) {
-			++i;
-			rootInOrder = inOrder[i];
-		}
-		if (rootInOrder == inOrder[len - 1] && rootInOrder != rootValue) {
-			throw new Exception("Invalid Input");
-		}
-		int leftLen = i;
-		if (leftLen > 0) {
-			int[] newPre = new int[leftLen];
-			for (int j = 1; j < leftLen + 1; j++) {
-				newPre[j - 1] = preOrder[j];
-			}
-			int[] newIn = new int[leftLen];
-			for (int j = 0; j < leftLen; j++) {
-				newIn[j] = inOrder[j];
-			}
-			root.left = ReBuildCore(newIn, newPre, leftLen);
-			if(root!= null && root.left != null)
-				root.left.parent = root;
-		}
-		if (leftLen < preOrder.length) {
-			int[] newPre = new int[len - 1 - leftLen];
-			for (int j = leftLen + 1; j < len; j++) {
-				newPre[j - leftLen - 1] = preOrder[j];
-			}
-			int[] newIn = new int[len - 1 - leftLen];
-			for (int j = leftLen + 1; j < len; j++) {
-				newIn[j - leftLen - 1] = inOrder[j];
-			}
-			root.right = ReBuildCore(newIn, newPre, len - leftLen - 1);
-			if(root != null && root.right != null)
-				root.right.parent = root;
-		}
-		return root;
+	public static MyBiTree ReBuildCore(int[] in, int[] pre, int len) throws Exception {
+		MyBiTree root = new MyBiTree(pre[0]);
+        if(pre[0] == pre[len - 1] && in[0] == in[len - 1] && in[0] == pre[0])
+            return root;
+        int rootValIn = in[0];
+        int i = 0;
+        while(rootValIn != root.value){
+            i++;
+            rootValIn = in[i];
+        }
+        int leftLen = i;
+        if(leftLen > 0){
+            int[] newPre = new int[leftLen];
+            for(i = 0; i < leftLen; i++)
+                newPre[i] = pre[i + 1];
+            int[] newIn = new int[leftLen];
+            for(i = 0; i < leftLen; i++)
+                newIn[i] = in[i];
+            root.left = ReBuildCore(newIn, newPre, leftLen);
+        }
+        if(leftLen < len - 1){
+            int[] newPre = new int[len - 1 - leftLen];
+            for(i = 0; i < len - 1 - leftLen; i++)
+                newPre[i] = pre[leftLen + i + 1];
+            int[] newIn = new int[len - 1 - leftLen];
+            for(i = 0; i < len - 1 - leftLen; i++)
+                newIn[i] = in[leftLen + 1 + i];
+            root.right = ReBuildCore(newIn, newPre, len - 1 - leftLen);
+        }
+        return root;
 	}
 
 	public static MyBiTree getNextInOrderNode(MyBiTree t) {
@@ -147,10 +129,12 @@ public class RebuildTreeAndGetNextInOrder {
 	}
 	
 	public static void main(String[] args) {
-		int[] pre = { 1, 2, 4, 7, 3, 5, 6, 8 };
-		int[] in = { 4, 7, 2, 1, 5, 3, 8, 6 };
+//		int[] pre = { 1, 2, 4, 7, 3, 5, 6, 8 };
+//		int[] in = { 4, 7, 2, 1, 5, 3, 8, 6 };
+		int[] pre = {1,2,4,3,5,6};
+		int[] in = {4,2,1,5,3,6};
 		try {
-			MyBiTree t = ReBuild(in, pre, 8);
+			MyBiTree t = ReBuild(in, pre, in.length);
 			inOrderPrint(t);
 			postOrderPrint(t);
 			System.out.println(getNextInOrderNode(t));

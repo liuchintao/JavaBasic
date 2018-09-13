@@ -25,5 +25,7 @@ public class KMPAlgorithm {
 	public static void main(String[] args) {
 		String str = "abCabCabC";
 		System.out.println(getNext(str));
+		String str1= "google";
+		System.out.println(getNext(str1));
 	}
 }
