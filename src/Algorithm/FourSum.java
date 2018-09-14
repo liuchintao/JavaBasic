@@ -4,8 +4,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import javax.naming.spi.DirStateFactory.Result;
-
 public class FourSum {
 
 	public static void main(String[] args) {

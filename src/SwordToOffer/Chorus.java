@@ -1,7 +1,6 @@
 package SwordToOffer;
 
 import java.util.Scanner;
-import java.lang.Math;
 public class Chorus{
     public static void main(String[] args){
         Scanner in = new Scanner(System.in);

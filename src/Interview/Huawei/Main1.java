@@ -1,9 +1,5 @@
 package Interview.Huawei;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Scanner;
-
 //public class Main1 {
 //
 //	static void solution(String str) {

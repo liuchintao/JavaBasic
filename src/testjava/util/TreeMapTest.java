@@ -1,6 +1,10 @@
 package testjava.util;
 
-import java.util.*;
+import java.util.Iterator;
+import java.util.Map;
+import java.util.NavigableMap;
+import java.util.Random;
+import java.util.TreeMap;
 
 /**
  * @desc TreeMap²âÊÔ³ÌĞò 
