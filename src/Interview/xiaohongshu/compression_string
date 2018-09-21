@@ -1,0 +1,46 @@
+# 题目描述：
+# 对一段字符串进行压缩，
+# 输入：任意长度字符串
+# 输出：压缩后的字符串
+# example:
+# xxxxyyyyyyzbbb 3x5yz2b
+
+
+# cannot use two for loop in python
+# the next one wont execute
+# like:
+# for#####
+# for######
+
+# how to concate string in python just like stringbuilder:
+# use a list
+# list.append()
+# and finally "".join(list)
+import sys
+if __name__ == "__main__":
+    var_global=[]
+    dict={}
+    a=[]
+    line=sys.stdin.readline()
+    a = list(line.strip("\n"))
+
+    for element  in a:
+        if element not in dict.keys():
+                dict[element]=0
+
+
+    for element in a:
+            for key in dict.keys():
+                if element==key:
+                    dict[key]+=1
+
+    print(dict)
+    output=[]
+    for key,value in dict.items():
+        if value>1:
+            output.append(str(value)+key)
+        else:
+            output.append(key)
+    print("".join(output))
+
+
