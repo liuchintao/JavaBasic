@@ -26,6 +26,9 @@ public class Nixushu {
 	
 	private static void permutation(int begin, int[] nums, int t) {
 		if(begin == nums.length) {
+			for(int i = 0; i < nums.length; i++)
+				System.out.print(nums[i]);
+			System.out.println();
 			if(checkInversion(nums, t)) {
 				count++;
 				if(count == 1)
