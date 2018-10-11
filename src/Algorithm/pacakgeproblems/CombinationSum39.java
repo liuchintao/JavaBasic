@@ -33,7 +33,7 @@ public class CombinationSum39 {
 //		else {
 //			for(int i = idx; i < candidates.length; i++) {
 //				arrayList.add(candidates[i]);
-//				traceback(conbinations, arrayList, candidates, target - candidates[i], idx);
+//				traceback(conbinations, arrayList, candidates, target - candidates[i], i);
 //				arrayList.remove(arrayList.size() - 1);
 //			}
 //		}
